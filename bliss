@@ -1,0 +1,43 @@
+#!/bin/sh
+
+# $FreeBSD$
+#
+# PROVIDE: bliss
+# REQUIRE: LOGIN DAEMON NETWORKING
+# BEFORE:
+# KEYWORD: shutdown
+
+# Add the following line to /etc/rc.conf to enable the Bliss server:
+#
+# bliss_enable="YES"
+
+. /etc/rc.subr
+
+name=bliss
+rcvar=`set_rcvar`
+pidfile="/var/run/${name}.pid"
+
+load_rc_config $name
+
+: #{bliss_enable:="NO"}
+
+# build Java command (uppercase variables are used in Bliss Java arguments)
+
+JAVA_EXEC="/usr/local/openjdk7/bin/java"
+INSTALL_HOME="/usr/local/bin/bliss"
+BLISS_MAX_HEAP="128M" 
+java_args="${VMARGS} -Xmx${BLISS_MAX_HEAP} -splash:bliss-splash.png -XX:HeapDumpPath=/tmp -XX:+HeapDumpOnOutOfMemoryError -XX:+CMSClassUnloadingEnabled -Djava.awt.headless=true -Djava.util.logging.config.file=${INSTALL_HOME}/conf/logging.properties -Djava.library.path=${INSTALL_HOME}/lib -Dbliss.periodicHeapDumpThreshold=0.9 -Dorg.osgi.framework.storage=${INSTALL_HOME}/felix-cache -Dfelix.auto.deploy.dir=${INSTALL_HOME}/bundle -Dbliss.bootstrapbundle.initialbundledir=${INSTALL_HOME}/bliss-bundle -Dbliss.launcher=$0 -jar ${INSTALL_HOME}/bin/felix.jar $@"
+java_command="${JAVA_EXEC} ${java_args}"
+procname="${JAVA_EXEC}"
+
+# build daemon command
+
+command="/usr/sbin/daemon"
+command_args="-f -p ${pidfile} ${java_command}"
+
+# set required files and directories
+
+required_dirs="${INSTALL_HOME}/felix-cache"
+required_files="${INSTALL_HOME}/bin/felix.jar"
+
+run_rc_command "$1"
