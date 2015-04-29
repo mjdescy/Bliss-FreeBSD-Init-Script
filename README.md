@@ -27,4 +27,4 @@ See the [wiki][wikihome] for full installation instructions for Bliss on FreeBSD
 
 ## Version info
 
-The current version of the script is based on the Bash startup script for  Release 20150316 of Bliss, and was tested in a FreeNAS 9.2 jail.
+The current version of the script is based on the Bash startup script for  Release 20150423 of Bliss, and was tested in a FreeNAS 9.2 jail.
