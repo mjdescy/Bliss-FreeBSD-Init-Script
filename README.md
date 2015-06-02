@@ -4,7 +4,7 @@ A rc.d script to run Bliss as a daemon under FreeBSD (as in a FreeNAS jail)
 
 ## Purpose
 
-[Bliss][blisshq] is ideal for running on home servers, but it is not evident (as of the 2015-03-16 release) how to install and run it properly on FreeBSD, as you would in a FreeNAS jail. This repository contains instructions and an init (rc.d) script to run Bliss properly on FreeBSD or in a FreeNAS jail.
+[Bliss][blisshq] is ideal for running on home servers, but it is not evident (as of the 2015-05-22 release) how to install and run it properly on FreeBSD, as you would in a FreeNAS jail. This repository contains instructions and an init (rc.d) script to run Bliss properly on FreeBSD or in a FreeNAS jail.
 
 [blisshq]: http://www.blisshq.com
 
@@ -27,4 +27,4 @@ See the [wiki][wikihome] for full installation instructions for Bliss on FreeBSD
 
 ## Version info
 
-The current version of the script is based on the Bash startup script for  Release 20150423 of Bliss, and was tested in a FreeNAS 9.2 jail.
+The current version of the script is based on the Bash startup script for Release 20150423 of Bliss, and was tested in a FreeNAS 9.3 jail.
